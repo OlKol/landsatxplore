@@ -113,7 +113,7 @@ def search(
             click.echo(scene["display_id"])
 
     if output == "json":
-        dump = json.dumps(results, indent=True)
+        dump = json.dumps(results, indent=True,  default=str)
         click.echo(dump)
 
     if output == "csv":
