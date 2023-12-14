@@ -114,18 +114,11 @@ class EarthExplorer(object):
                 headers=headers,
                 timeout=timeout,
             ) as r:
-                with tqdm(
-                    total=filesize,
-                    unit_scale=True,
-                    unit="B",
-                    unit_divisor=1024,
-                    initial=downloaded_bytes
-                ) as pbar:
-                    with open(local_filename, file_mode) as f:
-                        for chunk in r.iter_content(chunk_size=chunk_size):
-                            if chunk:
-                                f.write(chunk)
-                                pbar.update(chunk_size)
+                with open(local_filename, file_mode) as f:
+                    for chunk in r.iter_content(chunk_size=chunk_size):
+                        if chunk:
+                            f.write(chunk)
+                            
             return local_filename
 
         except requests.exceptions.Timeout:
